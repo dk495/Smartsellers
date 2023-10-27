@@ -1,0 +1,143 @@
+<html>
+<head>
+  <title>Lead Form Submission</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .form-group {
+      text-align: left; /* Align labels to the left */
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">Medicare TD Submission Form</h2>
+    <form id="leadForm">
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" id="first_name" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" id="last_name" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <label for="caller_id">Phone (ex: 7123456789)</label>
+        <input type="text" class="form-control" id="caller_id" placeholder="Phone">
+      </div>
+
+      <div class="form-group">
+        <label for="tcpa_opt_in">TCPA(48hrs old ex: YYYY-MM-DD HH:MM:SS)</label>
+        <input type="text" class="form-control" id="tcpa_opt_in" placeholder="YYYY-MM-DD HH:MM:SS">
+      </div>
+
+      <div class="form-group">
+        <label for="zip">Zip Code</label>
+        <input type="text" class="form-control" id="zip" placeholder="Zip Code">
+      </div>
+<div class="form-group">
+        <label for="state">State ex: TX,CA</label>
+        <input type="text" class="form-control" id="state" placeholder="State">
+      </div>
+<div class="form-group">
+        <label for="jornaya_leadid">Jornaya Leadid</label>
+        <input type="text" class="form-control" id="jornaya_leadid" placeholder="Jornaya Leadid (48hrs old)">
+      </div>
+
+   
+
+      <input type="hidden" id="traffic_source_id" value="99450">
+      <input type="hidden" id="lead_token" value="50619d3e825f45d59982011e6ccd5718">
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+ <div id="alertContainer"></div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+function getCurrentTimestamp() {
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');  // Month is zero-based
+  const day = String(now.getDate()).padStart(2, '0');
+  
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+    document.getElementById('leadForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const phone_home = '+1' + document.getElementById('caller_id').value;
+      const formData = new FormData(this);
+
+formData.append('trackdrive_number', '+18443660809');
+
+      
+      formData.append('caller_id', phone_home);
+
+    
+
+
+      
+     
+ 
+
+      const url = 'https://adolicious-llc.trackdrive.com/api/v1/inbound_webhooks/ping/aepico_availability_check?traffic_source_id=99450&' + new URLSearchParams(formData).toString();
+
+      fetch(url, {
+        method: 'POST'
+      })
+      .then(response => {
+        if (response.status === 200) {
+          const successAlert = `
+            <div class="alert alert-success" role="alert">
+              200 : Form submitted successfully! But Duplicate (Maybe Connect).
+            </div>`;
+document.getElementById('alertContainer').innerHTML = '';
+          document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+          // Clear form fields
+          document.getElementById('leadForm').reset();
+        } else if (response.status === 201) {
+          const successAlert = `
+            <div class="alert alert-success" role="alert">
+              201 : Form submitted successfully!
+            </div>`;
+document.getElementById('alertContainer').innerHTML = '';
+          document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+          // Clear form fields
+          document.getElementById('leadForm').reset();
+        } else if (response.status === 422) {
+          response.json().then(data => {
+            const errorAlert = `
+              <div class="alert alert-danger" role="alert">
+                Duplicate lead / DNC / BLA Not Submitted
+</div>`;
+document.getElementById('alertContainer').innerHTML = '';
+document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+              
+            
+          });
+        } else {
+          const errorAlert = `
+            <div class="alert alert-danger" role="alert">
+              Form submission failed. Please try again.
+</div>`;
+document.getElementById('alertContainer').innerHTML = '';
+document.getElementById('leadForm').insertAdjacentHTML('beforeend', errorAlert);
+            
+         
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    });
+</script>
+  <!-- Custom script for form submission and notification -->
+ 
+</body>
+</html>
