@@ -78,16 +78,11 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-        <label for="unsecured_debt_amount">Unsecured Debt Amount</label>
+        <label for="unsecured_debt_amount">Total Debt Amount</label>
         <input type="text" class="form-control" id="unsecured_debt_total" name="unsecured_debt_amount" required>
     </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="cc_debt_amount">Credit Card Debt Amount</label>
-                <input type="text" class="form-control" id="cc_debt" name="cc_debt_amount" required>
-            </div>
-        </div>
+       
     </div>
 
     
@@ -171,7 +166,7 @@ formData.append('state', document.getElementById('state').value);
 formData.append('address', document.getElementById('address').value);
 formData.append('address2', document.getElementById('address2').value);
 formData.append('source_url', 'https://thinkcallsllc.com/');
-formData.append('cc_debt', document.getElementById('cc_debt').value);
+
 formData.append('unsecured_debt_total', document.getElementById('unsecured_debt_total').value);
 formData.append('ip_address', document.getElementById('ip_address').value);
 formData.append('buyer_agent_name', document.getElementById('agentName').value);
