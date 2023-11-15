@@ -100,7 +100,13 @@
             </div>
         </div>
     </div>
-
+<div class="form-group">
+      <label for="income_source">Income Source</label>
+      <select class="form-control" id="source_of_income" required>
+                 <option value="true">Yes</option>
+		<option value="false">No</option>
+</select>
+    </div>
     <div class="form-group">
         <label for="agentName">Select an Agent:</label>
         <select class="form-control" id="agentName">
@@ -168,6 +174,7 @@ formData.append('state', document.getElementById('state').value);
 formData.append('address', document.getElementById('address').value);
 formData.append('address2', document.getElementById('address2').value);
 formData.append('source_url', 'https://thinkcallsllc.com/');
+ formData.append('source_of_income', document.getElementById('source_of_income').value);     
 
 formData.append('unsecured_debt_total', document.getElementById('unsecured_debt_total').value);
 formData.append('ip_address', document.getElementById('ip_address').value);
@@ -176,7 +183,7 @@ formData.append('buyer_agent_name', document.getElementById('agentName').value);
 
 
 
-formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+formData.append('notes', document.getElementById('jornaya_leadid').value);
 
       const url = 'https://dialhub.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
 
