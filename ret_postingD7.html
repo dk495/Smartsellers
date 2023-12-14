@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>D7 Lead Submission Form</title>
+  <!-- Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Lead Submission Form (10k Debt D7)</h2>
+  <form id="leadForm">
+ 
+    <div class="form-group">
+      <label for="phone_home">Phone</label>
+      <input type="text" class="form-control" id="caller_id"  required>
+    </div>
+ 
+    
+    <div class="form-group">
+      <label for="jornaya_leadid">Jornaya Lead ID</label>
+      <input type="text" class="form-control" id="jornaya_leadid" name="jornaya_leadid">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+<div id="alertContainer"></div>
+</div>
+
+<!-- Bootstrap JS and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+
+
+    document.getElementById('leadForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const phone_home =  document.getElementById('caller_id').value;
+      const formData = new FormData();
+  
+      formData.append('caller_number', phone_home);
+
+
+
+formData.append('universalleadId', document.getElementById('jornaya_leadid').value);
+
+      const url = 'https://retreaverdata.com/data_writing?key=6b72e446-805e-41f4-8519-0ea4f52ab7a9&' + new URLSearchParams(formData).toString();
+
+      fetch(url, {
+        method: 'POST'
+      })
+      .then(response => {
+                if (response.status === 200) {
+                    response.text().then(responseBody => {
+                        const successAlert = `
+                            <div class="alert alert-success" role="alert">
+                                200 : Form submitted successfully! Response Body: ${responseBody}
+                            </div>`;
+                        document.getElementById('alertContainer').innerHTML = '';
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+                    });
+                    // Clear form fields
+                    document.getElementById('leadForm').reset();
+                } else if (response.status === 201) {
+                    response.text().then(responseBody => {
+                        const successAlert = `
+                            <div class="alert alert-success" role="alert">
+                                201 : Form submitted successfully! Response Body: ${responseBody}
+                            </div>`;
+                        document.getElementById('alertContainer').innerHTML = '';
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+                    });
+                    // Clear form fields
+                    document.getElementById('leadForm').reset();
+                } else if (response.status === 422) {
+                    response.json().then(data => {
+                        const errorAlert = `
+                            <div class="alert alert-danger" role="alert">
+                                Error. Response Body: ${JSON.stringify(data)}
+                            </div>`;
+                        document.getElementById('alertContainer').innerHTML = '';
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+                    });
+                } else {
+                    response.text().then(responseBody => {
+                        const errorAlert = `
+                            <div class="alert alert-danger" role="alert">
+                                Form submission failed. Please try again. Response Body: ${responseBody}
+                            </div>`;
+                        document.getElementById('alertContainer').innerHTML = '';
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+                    });
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
