@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lead Submission Form</title>
+  <!-- Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>Lead Submission Form (15k Debt D2 2nd)</h2>
+  <form id="leadForm">
+    <div class="form-group">
+      <label for="first_name">First Name</label>
+      <input type="text" class="form-control" id="first_name" name="first_name" required>
+    </div>
+    <div class="form-group">
+      <label for="last_name">Last Name</label>
+      <input type="text" class="form-control" id="last_name" name="last_name" required>
+    </div>
+    <div class="form-group">
+      <label for="phone_home">Phone</label>
+      <input type="text" class="form-control" id="caller_id"  required>
+    </div>
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" class="form-control" id="address" name="address">
+    </div>
+ <div class="form-group">
+      <label for="address">Address2</label>
+      <input type="text" class="form-control" id="address2" name="address2">
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" name="city" required>
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" class="form-control" id="state" name="state" required>
+    </div>
+    <div class="form-group">
+      <label for="zip_code">Zip Code</label>
+      <input type="text" class="form-control" id="zip" name="zip_code" required>
+    </div>
+    <div class="form-group">
+      <label for="email_address">Email Address</label>
+      <input type="email" class="form-control" id="email" name="email_address">
+    </div>
+  
+    <div class="form-group">
+      <label for="unsecured_debt_amount">Unsecured Debt Amount</label>
+      <input type="text" class="form-control" id="unsecured_debt_total" name="unsecured_debt_amount" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="jornaya_leadid">Jornaya Lead ID</label>
+      <input type="text" class="form-control" id="jornaya_leadid" name="jornaya_leadid">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+<div id="alertContainer"></div>
+</div>
+
+<!-- Bootstrap JS and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+
+
+    document.getElementById('leadForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const phone_home = '+1' + document.getElementById('caller_id').value;
+      const formData = new FormData(this);
+      
+      
+   
+      formData.append('traffic_source_id', '1098');
+      formData.append('lead_token', '9da5b4b9f61143adad8a501f74e9f974');
+formData.append('caller_id', phone_home);
+
+formData.append('first_name', document.getElementById('first_name').value);
+formData.append('last_name', document.getElementById('last_name').value);
+formData.append('email', document.getElementById('email').value);
+formData.append('zip', document.getElementById('zip').value);
+formData.append('city', document.getElementById('city').value);
+formData.append('state', document.getElementById('state').value);
+formData.append('address', document.getElementById('address').value);
+formData.append('address2', document.getElementById('address2').value);
+
+formData.append('unsecured_debt_total', document.getElementById('unsecured_debt_total').value);
+
+
+
+formData.append('jornaya_leadid', document.getElementById('jornaya_leadid').value);
+
+      const url = 'https://dialhub.trackdrive.com/api/v1/leads?' + new URLSearchParams(formData).toString();
+
+      fetch(url, {
+        method: 'POST'
+      })
+      .then(response => {
+                if (response.status === 200) {
+                    response.text().then(responseBody => {
+                        const successAlert = `
+                            <div class="alert alert-success" role="alert">
+                                200 : Form submitted successfully! Response Body: ${responseBody}
+                            </div>`;
+                        document.getElementById('alertContainer').innerHTML = '';
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+                    });
+                    // Clear form fields
+                    document.getElementById('leadForm').reset();
+                } else if (response.status === 201) {
+                    response.text().then(responseBody => {
+                        const successAlert = `
+                            <div class="alert alert-success" role="alert">
+                                201 : Form submitted successfully! Response Body: ${responseBody}
+                            </div>`;
+                        document.getElementById('alertContainer').innerHTML = '';
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', successAlert);
+                    });
+                    // Clear form fields
+                    document.getElementById('leadForm').reset();
+                } else if (response.status === 422) {
+                    response.json().then(data => {
+                        const errorAlert = `
+                            <div class="alert alert-danger" role="alert">
+                                Error. Response Body: ${JSON.stringify(data)}
+                            </div>`;
+                        document.getElementById('alertContainer').innerHTML = '';
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+                    });
+                } else {
+                    response.text().then(responseBody => {
+                        const errorAlert = `
+                            <div class="alert alert-danger" role="alert">
+                                Form submission failed. Please try again. Response Body: ${responseBody}
+                            </div>`;
+                        document.getElementById('alertContainer').innerHTML = '';
+                        document.getElementById('alertContainer').insertAdjacentHTML('beforeend', errorAlert);
+                    });
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+  </script>
+ <script>
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault(); // Prevent the context menu from appearing
+        });
+    </script>
+</body>
+</html>
