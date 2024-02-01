@@ -8,7 +8,7 @@
 <body>
 
 <div class="container">
-  <h2>Lead Submission Form (15k Debt D2 2nd)</h2>
+  <h2>Lead Submission Form (15k Debt D4 2nd)</h2>
   <form id="leadForm">
     <div class="form-group">
       <label for="first_name">First Name</label>
@@ -72,7 +72,7 @@
     document.getElementById('leadForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const phone_home = '+1' + document.getElementById('caller_id').value;
-      const formData = new FormData(this);
+      const formData = new FormData();
       
       
    
