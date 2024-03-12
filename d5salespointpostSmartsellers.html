@@ -1,0 +1,73 @@
+<html>
+<head>
+  <title>d5 Lead Posting Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .form-group {
+      text-align: left; /* Align labels to the left */
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">d5 Lead Posting Form</h2>
+    <form id="leadForm">
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" id="first_name" placeholder="First Name">
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" id="last_name" placeholder="Last Name">
+      </div>
+      <div class="form-group">
+        <label for="caller_id">Phone (ex: 7123456789)</label>
+        <input type="text" class="form-control" id="caller_id" placeholder="Phone" required>
+      </div>
+
+    
+
+<div class="form-group">
+        <label for="zip">City</label>
+        <input type="text" class="form-control" id="city" placeholder="New York City">
+      </div>
+
+      <div class="form-group">
+        <label for="zip">Zip Code</label>
+        <input type="text" class="form-control" id="zip" placeholder="5 digits zipcode">
+      </div>
+<div class="form-group">
+        <label for="state">State ex: TX,CA</label>
+        <input type="text" class="form-control" id="state" placeholder="NY, CA">
+      </div>
+
+
+   
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+ <div id="alertContainer"></div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://dk495.github.io/ApiJS/d5salespointpostSmartsellers.js"></script>
+
+    
+
+
+ <script>
+    // Function to handle the contextmenu event
+    function disableRightClick(event) {
+      // Prevent the default right-click behavior
+      event.preventDefault();
+    }
+
+    // Attach the event listener to the document
+    document.addEventListener('contextmenu', disableRightClick);
+  </script>
+ 
+</body>
+</html>
