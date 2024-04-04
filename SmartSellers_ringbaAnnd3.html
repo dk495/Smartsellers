@@ -1,0 +1,64 @@
+<html>
+<head>
+  <title>SS Lead Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .form-group {
+      text-align: left; /* Align labels to the left */
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center">DEBT Lead Form (10k d4)</h2>
+    <form id="leadForm">
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" id="first_name" placeholder="First Name" required>
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input type="text" class="form-control" id="last_name" placeholder="Last Name" required>
+      </div>
+      <div class="form-group">
+        <label for="caller_id">Phone (ex: 7123456789)</label>
+        <input type="text" class="form-control" id="caller_id" placeholder="Phone" required>
+      </div>
+<div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+      </div>
+<div class="form-group">
+        <label for="zip">Zip</label>
+        <input type="text" class="form-control" id="zip" placeholder="5 digit zipcode" required>
+      </div>
+<div class="form-group">
+        <label for="jornaya">Jornaya Leadid Token</label>
+        <input type="text" class="form-control" id="jornaya" placeholder="Jornaya Leadid" required>
+      </div>
+<div class="form-group">
+        <label for="debt_amount">Total Debt Amount</label>
+        <input type="text" class="form-control" id="debt_amount" placeholder="500000" required>
+      </div>
+
+     
+  
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+ <div id="alertContainer"></div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://dk495.github.io/ApiJS/SmartSellers_ringbaAnnd3.js"></script>
+
+  <!-- Custom script for form submission and notification -->
+   <script>
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault(); // Prevent the context menu from appearing
+        });
+    </script>
+</body>
+</html>
