@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SS ACA Lead Submission Form DPC</title>
+  <!-- Bootstrap CSS link -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>ACA LEAD Submission Form DPC</h2>
+  <form id="leadForm">
+    <div class="form-group">
+      <label for="first_name">First Name</label>
+      <input type="text" class="form-control" id="first_name" name="first_name" placeholder="example: john" required>
+    </div>
+    <div class="form-group">
+      <label for="last_name">Last Name</label>
+      <input type="text" class="form-control" id="last_name" name="last_name" placeholder="example: smith" required>
+    </div>
+    <div class="form-group">
+      <label for="phone_home">Phone ex: 2108573827</label>
+      <input type="text" class="form-control" id="caller_id" placeholder="10 digits US number" required>
+    </div>
+    <div class="row">
+<div class="col-md-6">
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" class="form-control" id="state" name="state" placeholder="CA, TX" required>
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+      <label for="zip">Zipcode</label>
+      <input type="text" class="form-control" id="zip" name="zip" placeholder="5 digit zipcode" required>
+    </div>
+</div>
+</div>
+
+  <div class="row">
+<div class="col-md-6">
+    <div class="form-group">
+      <label for="email_address">Email Address</label>
+      <input type="email" class="form-control" placeholder="john@example.com" id="email" name="email_address">
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+      <label for="email_address">DOB</label>
+      <input type="date" class="form-control"  id="dob" name="dob">
+    </div>
+</div>
+</div>
+ 
+   
+   
+     <div class="form-group">
+      <label for="ip_address">IP Address</label>
+      <input type="text" class="form-control" id="ip_address" name="ip_address" placeholder="The IP Address where the form was filled out." required>
+    </div>
+    <div class="form-group">
+      <label for="jornaya_leadid">Jornaya Lead ID</label>
+      <input type="text" class="form-control" id="jornaya_leadid" name="jornaya_leadid" placeholder="Jornaya LeadID generated at the website." required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+<div id="alertContainer"></div>
+</div>
+
+<!-- Bootstrap JS and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://dk495.github.io/ApiJS/SS_dpc_ACA_TD.js"></script>
+</body>
+</html>
